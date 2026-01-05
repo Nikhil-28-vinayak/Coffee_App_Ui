@@ -1,5 +1,6 @@
 package com.example.mycoffeeapp.screens.homescreen
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,11 +22,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.mycoffeeapp.R
 import com.example.mycoffeeapp.screens.ui_Components.MyBottomNavBar
 import com.example.mycoffeeapp.ui.theme.IvaryWhite
 
@@ -71,8 +74,13 @@ fun HomeScreen() {
                     tint = Color.White
                 )
             }
-            Spacer(modifier = Modifier.height(40.dp))
+            Spacer(modifier = Modifier.height(30.dp))
+
             MySearchBar()
+
+            Spacer(modifier = Modifier.height(40.dp))
+
+            Image(painter = painterResource(R.drawable.banner_1), contentDescription = "banner")
         }
     }
 }
