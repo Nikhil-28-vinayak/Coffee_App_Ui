@@ -58,7 +58,8 @@ fun WelcomeScreen() {
             Text(
                 "Welcome to our cozy coffee corner, where every cup is a delight for you.",
                 color = Color.LightGray,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                fontSize = 15.sp
             )
             Spacer(modifier = Modifier.height(50.dp))
             Button(
