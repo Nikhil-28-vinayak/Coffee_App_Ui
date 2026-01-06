@@ -81,6 +81,8 @@ fun HomeScreen() {
             Spacer(modifier = Modifier.height(40.dp))
 
             Image(painter = painterResource(R.drawable.banner_1), contentDescription = "banner")
+
+            HomeScreenCategories()
         }
     }
 }
