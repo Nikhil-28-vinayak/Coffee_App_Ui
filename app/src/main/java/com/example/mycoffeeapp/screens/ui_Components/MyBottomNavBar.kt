@@ -1,5 +1,6 @@
 package com.example.mycoffeeapp.screens.ui_Components
 
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Icon
@@ -28,7 +29,8 @@ fun MyBottomNavBar() {
         NavItem(title = "Profile", icon = R.drawable.outline_account_circle_24 )
     )
 
-    NavigationBar(containerColor = MaterialTheme.colorScheme.surface) {
+    NavigationBar(containerColor = MaterialTheme.colorScheme.surface,
+        modifier = Modifier.height(80.dp)) {
         navItem.forEachIndexed{index, item->
             NavigationBarItem(
                 icon = { Icon(painter = painterResource(item.icon), contentDescription = item.title) },

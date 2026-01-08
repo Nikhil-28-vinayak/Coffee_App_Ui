@@ -29,6 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mycoffeeapp.R
+import com.example.mycoffeeapp.screens.model.Product
 import com.example.mycoffeeapp.screens.ui_Components.MyBottomNavBar
 import com.example.mycoffeeapp.ui.theme.IvaryWhite
 
@@ -56,33 +57,95 @@ fun HomeScreen() {
                 .padding(innerPadding)
         ) {
 
-            Text("Location", color = Color.Gray, fontSize = 14.sp)
+            // Display Product
 
-            Spacer(modifier = Modifier.height(4.dp))
-
-            Row(verticalAlignment = Alignment.CenterVertically) {
-
-                Text(location,
-                    color = Color.White,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 16.sp
+            val product = listOf(
+                Product(
+                    id = 1,
+                    name = "Espresso",
+                    description = "Strong and rich",
+                    price = 3.80,
+                    imageResource = R.drawable.coffee_1
+                ),
+                Product(
+                    id = 2,
+                    name = "Latte",
+                    description = "Smooth and creamy",
+                    price = 2.80,
+                    imageResource = R.drawable.coffee_2
+                ),
+                Product(
+                    id = 3,
+                    name = "Cappuccinos",
+                    description = "With chocolate",
+                    price = 1.40,
+                    imageResource = R.drawable.coffee_3
+                ),
+                Product(
+                    id = 4,
+                    name = "Mocha",
+                    description = "With cocoa flavor",
+                    price = 3.15,
+                    imageResource = R.drawable.coffee_4
+                ),
+                Product(
+                    id = 5,
+                    name = "Maccthiato",
+                    description = "Bold and milky",
+                    price = 2.10,
+                    imageResource = R.drawable.coffee_5
+                ),
+                Product(
+                    id = 6,
+                    name = "Flat White",
+                    description = "Velvety smooth",
+                    price = 3.34,
+                    imageResource = R.drawable.coffee_6
+                ),
+                Product(
+                    id = 7,
+                    name = "Iced Mocha",
+                    description = "Refreshing and rich",
+                    price = 1.99,
+                    imageResource = R.drawable.coffee_3
                 )
+            )
+            ProductGrid(product) {
 
-                Icon(
-                    imageVector = Icons.Default.KeyboardArrowDown,
-                    contentDescription = "Change location",
-                    tint = Color.White
-                )
+                Text("Location", color = Color.Gray, fontSize = 14.sp)
+
+                Spacer(modifier = Modifier.height(4.dp))
+
+                Row(verticalAlignment = Alignment.CenterVertically) {
+
+                    Text(
+                        location,
+                        color = Color.White,
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 16.sp
+                    )
+
+                    Icon(
+                        imageVector = Icons.Default.KeyboardArrowDown,
+                        contentDescription = "Change location",
+                        tint = Color.White
+                    )
+                }
+                Spacer(modifier = Modifier.height(30.dp))
+
+                MySearchBar()
+
+                Spacer(modifier = Modifier.height(40.dp))
+
+                Image(painter = painterResource(R.drawable.banner_1), contentDescription = "banner")
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                HomeScreenCategories()
+
+                Spacer(modifier = Modifier.height(16.dp))
+
             }
-            Spacer(modifier = Modifier.height(30.dp))
-
-            MySearchBar()
-
-            Spacer(modifier = Modifier.height(40.dp))
-
-            Image(painter = painterResource(R.drawable.banner_1), contentDescription = "banner")
-
-            HomeScreenCategories()
         }
     }
 }
