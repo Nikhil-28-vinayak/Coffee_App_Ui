@@ -11,8 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.mycoffeeapp.screens.homescreen.HomeScreen
-import com.example.mycoffeeapp.ui.theme.MyCoffeeAppTheme
+import com.example.mycoffeeapp.presentation.screens.detailscreen.DetailScreen
+import com.example.mycoffeeapp.presentation.screens.homescreen.HomeScreen
+import com.example.mycoffeeapp.presentation.theme.MyCoffeeAppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +21,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MyCoffeeAppTheme {
-                HomeScreen()
+                DetailScreen()
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.example.mycoffeeapp.screens.homescreen
+package com.example.mycoffeeapp.presentation.screens.homescreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -33,10 +33,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.mycoffeeapp.R
-import com.example.mycoffeeapp.screens.model.Product
-import com.example.mycoffeeapp.ui.theme.IvaryWhite
-import com.example.mycoffeeapp.ui.theme.LightBrown
-import com.example.mycoffeeapp.ui.theme.LightGray
+import com.example.mycoffeeapp.domain.model.Product
+import com.example.mycoffeeapp.presentation.theme.IvaryWhite
+import com.example.mycoffeeapp.presentation.theme.LightBrown
+import com.example.mycoffeeapp.presentation.theme.LightGray
 
 @Composable
 fun ProductCard(item: Product, weight: Modifier) {
