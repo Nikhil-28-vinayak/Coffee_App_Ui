@@ -2,6 +2,7 @@ package com.example.mycoffeeapp.presentation.screens.homescreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,20 +33,23 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.mycoffeeapp.R
 import com.example.mycoffeeapp.domain.model.Product
+import com.example.mycoffeeapp.presentation.navigation.Routes
 import com.example.mycoffeeapp.presentation.theme.IvaryWhite
 import com.example.mycoffeeapp.presentation.theme.LightBrown
 import com.example.mycoffeeapp.presentation.theme.LightGray
 
 @Composable
-fun ProductCard(item: Product, weight: Modifier) {
+fun ProductCard(item: Product, weight: Modifier, navController: NavHostController) {
     Card(
         modifier = weight
             .width(300.dp)
-            .padding(8.dp),
+            .padding(8.dp)
+            .clickable { navController.navigate(Routes.DetailScreen(item.id)) },
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(Color.LightGray.copy(0.4f)),
+        colors = CardDefaults.cardColors(Color.LightGray.copy(0.5f)),
     ) {
         Column(modifier = Modifier.padding(8.dp)) {
             Box(

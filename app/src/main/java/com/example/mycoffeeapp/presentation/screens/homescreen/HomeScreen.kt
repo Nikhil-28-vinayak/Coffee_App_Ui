@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -23,19 +22,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.mycoffeeapp.R
 import com.example.mycoffeeapp.domain.model.Product
 import com.example.mycoffeeapp.presentation.ui_Components.MyBottomNavBar
-import com.example.mycoffeeapp.presentation.theme.IvaryWhite
 
-@Preview(showBackground = true)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavHostController) {
     val location = "Janatha Rd, Palarivattom"
     Scaffold(
         bottomBar = { MyBottomNavBar() }
@@ -110,7 +106,7 @@ fun HomeScreen() {
                     imageResource = R.drawable.coffee_3
                 )
             )
-            ProductGrid(product) {
+            ProductGrid(product,navController) {
 
                 Text("Location", color = Color.Gray, fontSize = 14.sp)
 

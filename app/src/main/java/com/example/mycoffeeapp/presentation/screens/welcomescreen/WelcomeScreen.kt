@@ -18,19 +18,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.mycoffeeapp.R
+import com.example.mycoffeeapp.presentation.navigation.Routes
 import com.example.mycoffeeapp.presentation.theme.LightBrown
 
-@Preview(showBackground = true, showSystemUi = true)
+
 @Composable
-fun WelcomeScreen() {
+fun WelcomeScreen(navController: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -52,7 +53,8 @@ fun WelcomeScreen() {
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
                 fontSize = 28.sp,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                lineHeight = 35.sp
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(
@@ -63,7 +65,7 @@ fun WelcomeScreen() {
             )
             Spacer(modifier = Modifier.height(50.dp))
             Button(
-                onClick = {},
+                onClick = {navController.navigate(Routes.HomeScreen)},
                 modifier = Modifier.fillMaxWidth().height(50.dp),
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(

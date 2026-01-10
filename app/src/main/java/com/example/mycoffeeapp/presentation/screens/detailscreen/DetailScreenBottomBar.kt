@@ -39,7 +39,7 @@ fun DetailScreenBottomBar() {
             Column {
                 Text("Price", fontSize = 16.sp)
                 Spacer(modifier = Modifier.height(8.dp))
-                Text("$4.53", fontSize = 24.sp, fontWeight = FontWeight.SemiBold)
+                Text("$4.53", fontSize = 24.sp, fontWeight = FontWeight.SemiBold, color = LightBrown)
             }
 
             Spacer(modifier = Modifier.width(40.dp))

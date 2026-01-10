@@ -2,15 +2,17 @@ package com.example.mycoffeeapp.presentation.screens.detailscreen
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavHostController
 import com.example.mycoffeeapp.R
 import com.example.mycoffeeapp.domain.model.Product
+import com.example.mycoffeeapp.presentation.navigation.Routes
 
-@Preview(showBackground = true)
+
 @Composable
-fun DetailScreen() {
-
+fun DetailScreen(args: Routes.DetailScreen, navController: NavHostController) {
     val product = listOf(
         Product(
             id = 1,
@@ -57,13 +59,19 @@ fun DetailScreen() {
             imageResource = R.drawable.coffee_3
         )
     )
+    val selectedProduct = product.find { it.id == args.productId }
+
+    if (selectedProduct == null) {
+        Text("Product not found!", color = Color.Red)
+        return
+    }
     Scaffold(
-        topBar = { DetailScreenTopAppBar() },
+        topBar = { DetailScreenTopAppBar(navController) },
         bottomBar = { DetailScreenBottomBar() }
-    ) {innerPadding->
+    ) { innerPadding ->
         LazyColumn {
-            item{
-                //ProductDetailContent(innerPadding)
+            item {
+                ProductDetailContent(innerPadding = innerPadding, product = selectedProduct)
             }
         }
 
