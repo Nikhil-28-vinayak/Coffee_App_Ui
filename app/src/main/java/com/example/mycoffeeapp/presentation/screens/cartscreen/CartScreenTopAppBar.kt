@@ -1,9 +1,8 @@
-package com.example.mycoffeeapp.presentation.screens.detailscreen
+package com.example.mycoffeeapp.presentation.screens.cartscreen
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -21,21 +20,14 @@ import com.example.mycoffeeapp.presentation.navigation.Routes
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailScreenTopAppBar(navController: NavHostController) {
+fun CartScreenTopAppBar(navController: NavHostController) {
 
     TopAppBar(
-        title = { Text("Details",
+        title = { Text("Order",
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.Bold
         ) },
-        actions = {
-            Icon(
-                painter = painterResource(R.drawable.regular_outline_heart),
-                contentDescription = "Add to favourite",
-                modifier = Modifier.padding(end = 12.dp).size(40.dp)
-            )
-        },
         navigationIcon = {
             Icon(
                 painter = painterResource(R.drawable.regular_outline_arrow_left),

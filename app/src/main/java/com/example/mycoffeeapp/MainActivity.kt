@@ -5,16 +5,14 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.example.mycoffeeapp.presentation.navigation.Navgraph
-import com.example.mycoffeeapp.presentation.screens.detailscreen.DetailScreen
-import com.example.mycoffeeapp.presentation.theme.MyCoffeeAppTheme
+import com.example.mycoffeeapp.presentation.screens.cartscreen.CartScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-               Navgraph()
-
+            Navgraph()
         }
     }
 }

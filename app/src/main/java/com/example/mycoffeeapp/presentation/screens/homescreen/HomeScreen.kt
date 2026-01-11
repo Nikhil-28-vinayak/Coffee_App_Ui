@@ -34,7 +34,7 @@ import com.example.mycoffeeapp.presentation.ui_Components.MyBottomNavBar
 fun HomeScreen(navController: NavHostController) {
     val location = "Janatha Rd, Palarivattom"
     Scaffold(
-        bottomBar = { MyBottomNavBar() }
+        bottomBar = { MyBottomNavBar(navController) }
     ) { innerPadding ->
         Box(
             modifier = Modifier
