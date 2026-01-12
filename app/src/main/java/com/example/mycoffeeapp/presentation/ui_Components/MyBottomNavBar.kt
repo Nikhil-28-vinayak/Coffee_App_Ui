@@ -25,7 +25,7 @@ import com.example.mycoffeeapp.presentation.navigation.Routes
 import com.example.mycoffeeapp.presentation.theme.LightBrown
 
 @Composable
-fun MyBottomNavBar(navController: NavHostController) {
+fun MyBottomNavBar(navController: NavHostController, routes: String) {
     var selected by remember { mutableStateOf(false) }
     var selectedIcon by remember { mutableStateOf("Home") }
     //Bottom Nav Item
@@ -44,16 +44,21 @@ fun MyBottomNavBar(navController: NavHostController) {
                 icon = { Icon(painter = painterResource(item.icon), contentDescription = item.title) },
                 label = { Text(item.title) },
                 modifier = Modifier.size(30.dp),
-                onClick = { selectedIcon = item.title
-                    navController.navigate(item.routes) },
+                onClick = { navController.navigate(item.routes){
+                    popUpTo( navController.graph.startDestinationId  ){
+                        saveState = true
+                    }
+                    launchSingleTop =  true
+                    restoreState = true
+                } },
 
-                selected = selectedIcon == item.title,
+                selected = item.title == routes,
 
                 colors = NavigationBarItemDefaults.colors(
                     selectedTextColor = LightBrown,
                     selectedIconColor = LightBrown,
                     unselectedIconColor = Color.Gray,
-                    unselectedTextColor = Color.Gray,
+                    unselectedTextColor = Color.Transparent,
                     indicatorColor = LightBrown.copy(alpha = 0.03f)
                 )
             )

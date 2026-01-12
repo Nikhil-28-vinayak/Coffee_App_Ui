@@ -57,13 +57,13 @@ fun CartScreen(navController: NavHostController) {
     val totalAmount by remember { mutableStateOf(price + deliveryFee) }
 
     Scaffold(
-        topBar = { CartScreenTopAppBar(navController) },
-        bottomBar = { MyBottomNavBar(navController) }
+        topBar = { CartScreenTopAppBar() },
+        bottomBar = { MyBottomNavBar(navController,"Cart") }
     ) { innerPadding ->
         LazyColumn(
             modifier = Modifier
                 .padding(innerPadding)
-                .padding(16.dp)
+                .padding(horizontal = 16.dp)
         ) {
             item {
                 Row {
