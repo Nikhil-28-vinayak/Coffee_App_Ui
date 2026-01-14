@@ -27,8 +27,8 @@ fun CategoryChip(
 ) {
     Box(
         modifier = Modifier
-            .width(90.dp)
-            .height(30.dp)
+            .width(95.dp)
+            .height(35.dp)
             .clip(RoundedCornerShape(6.dp))
             .clickable(onClick = { onSelected() })
             .background(if(isSelected) LightBrown else LightGray.copy(0.6f)),
@@ -37,6 +37,6 @@ fun CategoryChip(
         Text(text,
             fontWeight = FontWeight.SemiBold,
             fontSize = 14.sp,
-            maxLines = 1)
+            maxLines = 1,)
     }
 }

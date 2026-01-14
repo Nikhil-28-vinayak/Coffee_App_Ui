@@ -5,21 +5,26 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import com.example.mycoffeeapp.presentation.theme.LightBrown
 
 
 @Composable
 fun AppMessageDialog(
-     show: Boolean,
+    show: Boolean,
     title: String,
     message: String,
-    onDismiss: () -> Unit
+    button1: String,
+    button2: String,
+    onDismiss: () -> Unit,
+    onClick: () -> Unit,
 ) {
     if (show) {
         AlertDialog(
             onDismissRequest = onDismiss,
             title = { Text(text = title) },
             text = { Text(text = message) },
-            confirmButton = { TextButton(onClick = onDismiss){ Text("OK") } }
+            confirmButton = { TextButton(onClick = onClick) { Text(button1, color = LightBrown) } },
+            dismissButton = {TextButton(onClick = onDismiss) { Text(button2, color = LightBrown) }}
         )
     }
 }

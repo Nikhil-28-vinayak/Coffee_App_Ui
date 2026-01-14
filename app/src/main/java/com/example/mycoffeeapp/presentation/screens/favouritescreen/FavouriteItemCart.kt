@@ -10,13 +10,20 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,12 +33,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.mycoffeeapp.R
 import com.example.mycoffeeapp.domain.model.Product
+import com.example.mycoffeeapp.presentation.theme.LightBrown
 import com.example.mycoffeeapp.presentation.theme.LightGray
+import com.example.mycoffeeapp.presentation.ui_Components.AppMessageDialog
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FavouriteItemCart(item: Product, onRemove: ()->Unit) {
+fun FavouriteItemCart(item: Product, onRemove: () -> Unit) {
+    var showDialog by remember { mutableStateOf(false) }
+    var delete by remember { mutableStateOf(false) }
     Card(
-        modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 6.dp),
         colors = CardDefaults.cardColors(
             containerColor = LightGray
         ),
@@ -80,7 +94,7 @@ fun FavouriteItemCart(item: Product, onRemove: ()->Unit) {
                 horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 IconButton(
-                    onClick = {onRemove()},
+                    onClick = { showDialog = true },
                     modifier = Modifier.size(36.dp)
                 ) {
                     Icon(
@@ -93,4 +107,16 @@ fun FavouriteItemCart(item: Product, onRemove: ()->Unit) {
         }
     }
 
+    AppMessageDialog(
+        show = showDialog,
+        title = "Delete Item",
+        message = "Are you sure you want to delete!",
+        button1 = "Delete",
+        button2 = "Cancel",
+        onDismiss = { showDialog = false }
+    ) {
+        onRemove()
+        showDialog = false
+    }
 }
+

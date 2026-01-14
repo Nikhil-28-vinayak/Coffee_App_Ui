@@ -66,8 +66,10 @@ fun DetailScreenBottomBar() {
                 show = showCartDialog,
                 title = "Added to Cart",
                 message = "Item has been added to your cart.",
+                button1 = "OK",
+                button2 = "",
                 onDismiss = {showCartDialog = false}
-            )
+            ){showCartDialog = false}
         }
     }
 }
