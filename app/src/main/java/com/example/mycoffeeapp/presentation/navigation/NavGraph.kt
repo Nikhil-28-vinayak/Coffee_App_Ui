@@ -9,6 +9,7 @@ import com.example.mycoffeeapp.presentation.screens.cartscreen.CartScreen
 import com.example.mycoffeeapp.presentation.screens.detailscreen.DetailScreen
 import com.example.mycoffeeapp.presentation.screens.favouritescreen.FavouriteScreen
 import com.example.mycoffeeapp.presentation.screens.homescreen.HomeScreen
+import com.example.mycoffeeapp.presentation.screens.profilescreen.ProfileScreen
 import com.example.mycoffeeapp.presentation.screens.welcomescreen.WelcomeScreen
 
 @Composable
@@ -36,6 +37,10 @@ fun Navgraph(){
 
         composable<Routes.FavouriteScreen> {
             FavouriteScreen(navController)
+        }
+
+        composable<Routes.ProfileScreen> {
+            ProfileScreen(navController)
         }
     }
 }
