@@ -12,6 +12,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -41,15 +44,18 @@ import com.example.mycoffeeapp.presentation.theme.LightGray
 @Composable
 fun PaymentModeSelectionCard(totalAmount: Double) {
 
+    var changeIcon by remember { mutableStateOf(false) }
     var expanded by remember { mutableStateOf(false) }
     var selectedMode by remember { mutableStateOf("Online") }
     val payModes = listOf("Online", "Cash")
 
-    Card(modifier = Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(
-        containerColor = LightGray,
-    ), elevation = CardDefaults.cardElevation(
-        defaultElevation = 4.dp
-    )) {
+    Card(
+        modifier = Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(
+            containerColor = LightGray,
+        ), elevation = CardDefaults.cardElevation(
+            defaultElevation = 4.dp
+        )
+    ) {
 
         Column(modifier = Modifier.padding(24.dp)) {
 
@@ -78,9 +84,9 @@ fun PaymentModeSelectionCard(totalAmount: Double) {
                                 color = LightBrown
                             )
                         )
-                    }else{
+                    } else {
                         Text(
-                            "$ ${totalAmount+1}",
+                            "$ ${totalAmount + 1}",
                             style = MaterialTheme.typography.bodyLarge.copy(
                                 color = LightBrown
                             )
@@ -94,16 +100,22 @@ fun PaymentModeSelectionCard(totalAmount: Double) {
                 ) {
                     Column {
                         Icon(
-                            painter = painterResource(R.drawable.regular_outline_arrow_down),
+                            painter = painterResource(if (!changeIcon) R.drawable.regular_outline_arrow_up else R.drawable.regular_outline_arrow_down),
                             contentDescription = "Arrow down",
                             modifier = Modifier
                                 .size(20.dp)
-                                .clickable { expanded = true }
+                                .clickable {
+                                    expanded = true
+                                    if (!changeIcon) changeIcon = true else changeIcon = false
+                                }
                         )
 
                         DropdownMenu(
                             expanded = expanded == true,
-                            onDismissRequest = { expanded = false }
+                            onDismissRequest = {
+                                expanded = false
+                                if (!changeIcon) changeIcon = true else changeIcon = false
+                            }
                         ) {
                             payModes.forEach() { it ->
                                 DropdownMenuItem(
@@ -111,6 +123,7 @@ fun PaymentModeSelectionCard(totalAmount: Double) {
                                     onClick = {
                                         selectedMode = it
                                         expanded = false
+                                        if (!changeIcon) changeIcon = true else changeIcon = false
                                     },
                                     leadingIcon = {
                                         Icon(
@@ -120,10 +133,12 @@ fun PaymentModeSelectionCard(totalAmount: Double) {
                                             tint = LightBrown
                                         )
                                     },
-                                    modifier = Modifier.padding(4.dp).background(
-                                        color = if (selectedMode == it) LightBrown.copy(alpha = 0.15f)
-                                        else Color.Transparent
-                                    )
+                                    modifier = Modifier
+                                        .padding(4.dp)
+                                        .background(
+                                            color = if (selectedMode == it) LightBrown.copy(alpha = 0.15f)
+                                            else Color.Transparent
+                                        )
                                 )
                             }
                         }

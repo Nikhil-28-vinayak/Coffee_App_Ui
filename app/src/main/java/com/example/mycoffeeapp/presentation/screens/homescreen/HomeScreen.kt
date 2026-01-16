@@ -2,6 +2,7 @@ package com.example.mycoffeeapp.presentation.screens.homescreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,10 +14,18 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -32,9 +41,15 @@ import com.example.mycoffeeapp.presentation.ui_Components.MyBottomNavBar
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
-    val location = "Janatha Rd, Palarivattom"
+    var showLocation by remember { mutableStateOf(false) }
+    val snackbarState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
+    val location1 = "Janatha Rd, Palarivattom"
+    val location2 = "Ernakulam, Kerala - 682025"
+
     Scaffold(
-        bottomBar = { MyBottomNavBar(navController,"Home") }
+        snackbarHost = { SnackbarHost(snackbarState) },
+        bottomBar = { MyBottomNavBar(navController, "Home") }
     ) { innerPadding ->
         Box(
             modifier = Modifier
@@ -55,58 +70,8 @@ fun HomeScreen(navController: NavHostController) {
 
             // Display Product
 
-            val product = listOf(
-                Product(
-                    id = 1,
-                    name = "Espresso",
-                    description = "Strong and rich",
-                    price = 3.80,
-                    imageResource = R.drawable.coffee_1
-                ),
-                Product(
-                    id = 2,
-                    name = "Latte",
-                    description = "Smooth and creamy",
-                    price = 2.80,
-                    imageResource = R.drawable.coffee_2
-                ),
-                Product(
-                    id = 3,
-                    name = "Cappuccinos",
-                    description = "With chocolate",
-                    price = 1.40,
-                    imageResource = R.drawable.coffee_3
-                ),
-                Product(
-                    id = 4,
-                    name = "Mocha",
-                    description = "With cocoa flavor",
-                    price = 3.15,
-                    imageResource = R.drawable.coffee_4
-                ),
-                Product(
-                    id = 5,
-                    name = "Maccthiato",
-                    description = "Bold and milky",
-                    price = 2.10,
-                    imageResource = R.drawable.coffee_5
-                ),
-                Product(
-                    id = 6,
-                    name = "Flat White",
-                    description = "Velvety smooth",
-                    price = 3.34,
-                    imageResource = R.drawable.coffee_6
-                ),
-                Product(
-                    id = 7,
-                    name = "Iced Mocha",
-                    description = "Refreshing and rich",
-                    price = 1.99,
-                    imageResource = R.drawable.coffee_3
-                )
-            )
-            ProductGrid(product,navController) {
+            var showCategories by remember { mutableStateOf("") }
+            ProductGrid(navController, scope, snackbarState, topContent = {
 
                 Text("Location", color = Color.Gray, fontSize = 14.sp)
 
@@ -115,16 +80,28 @@ fun HomeScreen(navController: NavHostController) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
 
                     Text(
-                        location,
+                        location1,
                         color = Color.White,
                         fontWeight = FontWeight.SemiBold,
                         fontSize = 16.sp
                     )
 
                     Icon(
-                        imageVector = Icons.Default.KeyboardArrowDown,
+                        imageVector = if (!showLocation) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
                         contentDescription = "Change location",
-                        tint = Color.White
+                        tint = Color.White,
+                        modifier = Modifier.clickable {
+                            if (!showLocation) showLocation = true else showLocation = false
+                        }
+                    )
+
+                }
+                if (showLocation) {
+                    Text(
+                        location2,
+                        color = Color.White,
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 13.sp
                     )
                 }
                 Spacer(modifier = Modifier.height(30.dp))
@@ -137,11 +114,13 @@ fun HomeScreen(navController: NavHostController) {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                HomeScreenCategories()
+                showCategories=homeScreenCategories()
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-            }
+            },
+               showCategory = showCategories
+            )
         }
     }
 }

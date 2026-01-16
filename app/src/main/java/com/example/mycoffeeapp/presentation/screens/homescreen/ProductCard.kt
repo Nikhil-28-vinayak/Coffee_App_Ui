@@ -14,18 +14,18 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -47,9 +47,17 @@ import com.example.mycoffeeapp.presentation.navigation.Routes
 import com.example.mycoffeeapp.presentation.theme.IvaryWhite
 import com.example.mycoffeeapp.presentation.theme.LightBrown
 import com.example.mycoffeeapp.presentation.theme.LightGray
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
-fun ProductCard(item: Product, weight: Modifier, navController: NavHostController) {
+fun ProductCard(
+    item: Product,
+    weight: Modifier,
+    navController: NavHostController,
+    scope: CoroutineScope,
+    snackbarState: SnackbarHostState
+) {
     var changeColor by remember { mutableStateOf(false) }
     Card(
         modifier = weight
@@ -78,7 +86,9 @@ fun ProductCard(item: Product, weight: Modifier, navController: NavHostControlle
                         .align(Alignment.TopEnd)
                         .background(LightGray, RoundedCornerShape(8.dp))
                         .padding(horizontal = 8.dp, vertical = 4.dp)
-                        .clickable { if (!changeColor) changeColor = true else changeColor = false },
+                        .clickable {
+                            if (!changeColor) changeColor = true else changeColor = false
+                        },
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
@@ -125,7 +135,15 @@ fun ProductCard(item: Product, weight: Modifier, navController: NavHostControlle
                 )
 
                 IconButton(
-                    onClick = {},
+                    onClick = {
+                        scope.launch {
+                            snackbarState.showSnackbar(
+                                message = "${item.name} is added to cart",
+                                actionLabel = "Go to cart",
+                                duration = SnackbarDuration.Short,
+                            )
+                        }
+                    },
                     modifier = Modifier.background(
                         color = LightBrown,
                         shape = RoundedCornerShape(10.dp)
